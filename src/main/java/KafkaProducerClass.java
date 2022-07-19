@@ -5,18 +5,23 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.util.Properties;
 import static java.lang.Thread.sleep;
 
+
+
+
 public class KafkaProducerClass {
-    public String boot;
-    public KafkaProducerClass(String boot){
-        this.boot=boot;
+    public String bootstrapServers;
+
+    public KafkaProducerClass(String bootstrapServers) {
+        this.bootstrapServers = bootstrapServers;
     }
+
 
     //Setup Properties for Kafka Producer
     Properties kafkaProps = new Properties();
 
     void producing() { // this will produce the messages
         //List of brokers to connect to
-      kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, boot);
+      kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 
     //Serializer class used to convert Keys to Byte Arrays
         kafkaProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,

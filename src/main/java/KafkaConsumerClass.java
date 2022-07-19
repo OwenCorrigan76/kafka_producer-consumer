@@ -6,25 +6,27 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
-
+import java.util.Properties;
 import static java.lang.Thread.sleep;
 
 public class KafkaConsumerClass {
-public String boot;
+public String bootstrapServers;
 
-  public KafkaConsumerClass(String boot){
-      this.boot =boot;
+  public KafkaConsumerClass(String bootstrapServers){
+      this.bootstrapServers =bootstrapServers;
   }
 // getters and setters  public
 
-   void consuming(){
+
+    void consuming() throws InterruptedException {
 
         //Setup Properties for consumer
         Properties kafkaProps = new Properties();
 
         //List of Kafka brokers to connect to
         kafkaProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-               boot);
+               bootstrapServers);
+        System.out.println(bootstrapServers);
 
         //Deserializer class to convert Keys from Byte Array to String
         kafkaProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
@@ -61,7 +63,7 @@ public String boot;
            //Print batch of records consumed
            for (ConsumerRecord<String, String> message : messages)
                System.out.println("Message received : " + message);
-         //  sleep(3000);
+          sleep(3000);
        }
    }
 }
