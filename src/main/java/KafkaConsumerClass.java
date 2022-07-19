@@ -10,6 +10,12 @@ import java.util.Properties;
 import static java.lang.Thread.sleep;
 
 public class KafkaConsumerClass {
+public String boot;
+
+  public KafkaConsumerClass(String boot){
+      this.boot =boot;
+  }
+// getters and setters  public
 
    void consuming(){
 
@@ -18,7 +24,7 @@ public class KafkaConsumerClass {
 
         //List of Kafka brokers to connect to
         kafkaProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "localhost:9092");
+               boot);
 
         //Deserializer class to convert Keys from Byte Array to String
         kafkaProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
