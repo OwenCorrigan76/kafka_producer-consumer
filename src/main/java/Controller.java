@@ -28,11 +28,8 @@ public class Controller {
             myProducer.producing();
         } else if (args[0].equals("consumer")) {
             System.out.println("Starting consumer");
-                KafkaConsumerClass myConsumer = new KafkaConsumerClass(bootstrapServers, "", "", "o", "");
+            KafkaConsumerClass myConsumer = new KafkaConsumerClass(bootstrapServers, "", "", "o", "");
             myConsumer.consuming();
         } else throw new IllegalArgumentException("Unknown Argument: " + args[0] + " inputted.");
     }
 }
-
-
-
