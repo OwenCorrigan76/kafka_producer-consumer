@@ -12,42 +12,12 @@ import java.util.Properties;
 import static java.lang.Thread.sleep;
 
 public class KafkaConsumerClass {
-    public String bootstrapServers;
-    public String topic;
-    public String groupId;
-    public String key;  // key deserializer
-    public String value; // value deserializer
-
-    public KafkaConsumerClass(String bootstrapServers, String topic, String groupId, String key, String value) {
-        this.bootstrapServers = bootstrapServers;
-        this.topic = topic;
-        this.groupId = groupId;
-        this.key = key;
-        this.value = value;
-    }
-
-    public static Properties getProperties() throws Exception { // new method using Properties Class
-        FileInputStream input = new FileInputStream("../src/main/resources/config.properties");
-        Properties props = new Properties();
-        props.load(input);
-        String userName = props.getProperty("username");
-        String topic = props.getProperty("default.topic");
-        String key = props.getProperty("key.deserializer");
-        String value = props.getProperty("value.deserializer");
-        return props;
-    }
-
-
-    //Setup Properties for consumer
     Properties props = new Properties();
 
+    public KafkaConsumerClass(Properties props) {
+        this.props = props;
+    }
     void consuming() throws InterruptedException {
-
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        System.out.println(bootstrapServers);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, key);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, value);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 
         //Create a Consumer
         KafkaConsumer<String, String> simpleConsumer =

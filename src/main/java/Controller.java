@@ -1,13 +1,16 @@
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.protocol.types.Field;
+
+import java.io.FileInputStream;
 import java.util.Properties;
 
 public class Controller {
     public static void main(String[] args) throws Exception {
 
         // This is to test that the value is being passed
-        Properties props = KafkaProducerClass.getProperties(); // new Properties object called propsKey
-        props.getProperty("key"); // get the key from config.properties
-        System.out.println(props); // print the value of key
-
+        FileInputStream input = new FileInputStream("/config/config.properties");
+        Properties props = new Properties(); // empty properties object
+        props.load(input); // loads the value from the config.properties file        System.out.println(props); // print the value of key
 
         String bootstrapServers = System.getenv("BOOTSTRAP_SERVERS");// if not set it will be null
         System.out.println("getting BOOTSTRAP_SERVERS");
@@ -24,11 +27,11 @@ public class Controller {
         }
         if (args[0].equals("producer")) { // object literal calling .equals and passing it producer
             System.out.println("Starting producer");
-            KafkaProducerClass myProducer = new KafkaProducerClass(bootstrapServers, "", "", "");
+            KafkaProducerClass myProducer = new KafkaProducerClass(props);
             myProducer.producing();
         } else if (args[0].equals("consumer")) {
             System.out.println("Starting consumer");
-            KafkaConsumerClass myConsumer = new KafkaConsumerClass(bootstrapServers, "", "", "o", "");
+            KafkaConsumerClass myConsumer = new KafkaConsumerClass(props);
             myConsumer.consuming();
         } else throw new IllegalArgumentException("Unknown Argument: " + args[0] + " inputted.");
     }
