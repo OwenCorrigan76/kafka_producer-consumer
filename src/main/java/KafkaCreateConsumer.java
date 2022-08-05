@@ -23,7 +23,7 @@ public class KafkaCreateConsumer {
     public static Properties getProperties() { // new method using Properties Class
         Properties props = null;
         try {
-            FileInputStream input = new FileInputStream("/config.properties");
+            FileInputStream input = new FileInputStream("src/main/resources/config.properties");
             props = new Properties();
             props.load(input);
         } catch (IOException e) {

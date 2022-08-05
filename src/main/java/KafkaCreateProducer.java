@@ -20,7 +20,7 @@ public class KafkaCreateProducer {
         Properties props = null;
         try {
             props = new Properties();
-            FileInputStream input = new FileInputStream("/config.properties");
+            FileInputStream input = new FileInputStream("src/main/resources/config.properties");
             props.load(input);
         } catch (IOException e) {
             throw new RuntimeException(e);
