@@ -35,11 +35,10 @@ public class KafkaCreateProducer {
             while (true) {
                 ProducerRecord<String, String> owensKafkaRecord =
                         new ProducerRecord<String, String>(
-                                "kafka.learning.orders",    //Topic name
-                                //   String.valueOf(i),          //Key for the message
-                                "Owen Sending Message Hello-World! "        //Message Content
+                                "my-topic",    //Topic name
+                                "Sending....."         //Message Content
                         );
-                System.out.println("Program is Running" + owensKafkaRecord);// print message and ProducerRecord
+                System.out.println("Producer Message");// print message and ProducerRecord
                 sleep(3000); // wait 3 seconds between print statements
                 simpleProducer.send(owensKafkaRecord); //Publish to Kafka
                 Thread.sleep(3000); // wait 3 seconds

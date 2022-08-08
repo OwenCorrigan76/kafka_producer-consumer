@@ -36,18 +36,18 @@ public class KafkaCreateConsumer {
     Properties props = getProperties();
 
     void consuming() throws InterruptedException {
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+       props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         System.out.println(bootstrapServers);
 
         //Create a Consumer
         KafkaConsumer<String, String> simpleConsumer =
                 new KafkaConsumer<String, String>(props);
         //Subscribe to the kafka.learning.orders topic
-        simpleConsumer.subscribe(Arrays.asList("kafka.learning.orders"));
+        simpleConsumer.subscribe(Arrays.asList("my-topic"));
         while (true) {
             ConsumerRecords<String, String> messages =
                     simpleConsumer.poll(Duration.ofMillis(300)); // poll for message every .3 seconds
-            System.out.println("This is working");
+            System.out.println("Listening....");
             //Print batch of records consumed
             for (ConsumerRecord<String, String> message : messages) //loop
                 System.out.println("Message received : " + message);
