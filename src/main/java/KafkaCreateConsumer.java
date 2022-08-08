@@ -10,7 +10,6 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-import static java.lang.Thread.sleep;
 
 public class KafkaCreateConsumer {
     public String bootstrapServers;
@@ -35,8 +34,8 @@ public class KafkaCreateConsumer {
     //Setup Properties for consumer
     Properties props = getProperties();
 
-    void consuming() throws InterruptedException {
-       props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+    void consuming()  {
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         System.out.println(bootstrapServers);
 
         //Create a Consumer
@@ -46,12 +45,13 @@ public class KafkaCreateConsumer {
         simpleConsumer.subscribe(Arrays.asList("my-topic"));
         while (true) {
             ConsumerRecords<String, String> messages =
-                    simpleConsumer.poll(Duration.ofMillis(300)); // poll for message every .3 seconds
+                    simpleConsumer.poll(Duration.ofMillis(7000)); // poll for message every .3 seconds
             System.out.println("Listening....");
             //Print batch of records consumed
             for (ConsumerRecord<String, String> message : messages) //loop
+            {
                 System.out.println("Message received : " + message);
-            sleep(3000); // wait for 3 seconds
+            }
         }
     }
 }

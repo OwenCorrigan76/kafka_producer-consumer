@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: java-kafka-consumer
+  name: java-kafka-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: java-kafka-consumer
+    spec:
+      containers:
+      - name: my-java-kafka-consumer
+        image: owenerz/myconsumerimage
+
+        env:
+          - name: BOOTSTRAP_SERVERS
+            value: my-cluster-kafka-bootstrap:9092
+        
